@@ -41,6 +41,12 @@ services:
       - GUNICORN_WORKERS=${GUNICORN_WORKERS:-2}
       - GUNICORN_THREADS=${GUNICORN_THREADS:-4}
       - GUNICORN_TIMEOUT=${GUNICORN_TIMEOUT:-120}
+
+      # Optional — enables the Databases feature. Point at a SEPARATE Postgres
+      # database with a CREATEROLE (non-superuser) provisioner role; see
+      # .env.example. Empty = feature off. The Postgres container must share a
+      # Docker network with this app (enable "Connect to Predefined Network").
+      - PYRUNNER_DATA_DB_URL=${PYRUNNER_DATA_DB_URL:-}
     volumes:
       - pyrunner_data:/app/data
       # Uploaded plugins live here so they survive redeploys (stock image +
